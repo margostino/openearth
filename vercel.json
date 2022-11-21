@@ -3,7 +3,7 @@
     "silent": true
   },
   "functions": {
-    "api/hello.go": {
+    "api/json.go": {
       "memory": 1024,
       "maxDuration": 5
     }
