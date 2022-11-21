@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func Json(w http.ResponseWriter, r *http.Request) {
+func Nasa(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	w.Header().Set("Content-Type", "application/json")
 	resp := make(map[string]string)

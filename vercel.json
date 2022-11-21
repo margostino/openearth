@@ -3,7 +3,7 @@
     "silent": true
   },
   "functions": {
-    "api/json.go": {
+    "api/nasa.go": {
       "memory": 1024,
       "maxDuration": 5
     }
