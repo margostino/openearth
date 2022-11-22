@@ -1,23 +1,34 @@
 package handler
 
 import (
-	"encoding/json"
-	"fmt"
+	"github.com/margostino/earth-station-api/config"
+	"github.com/margostino/earth-station-api/nasa"
+	"log"
 	"net/http"
+	"strings"
 )
 
 func Nasa(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusCreated)
-	w.Header().Set("Content-Type", "application/json")
-	resp := make(map[string]string)
-	resp["message"] = "Hello World from Go"
-	resp["language"] = "go"
-	resp["cloud"] = "Hosted on Vercel!"
-	jsonResp, err := json.Marshal(resp)
-	if err != nil {
-		fmt.Println("Error happened in JSON marshal. Err: %s", err)
-	} else {
-		w.Write(jsonResp)
+
+	if r.Method != "GET" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
+
+	if r.URL.Path == "/api/nasa/topics" || strings.HasPrefix(r.URL.Path, "/api/nasa/topics/") {
+		feedUrls := config.GetUrls()
+
+		if r.URL.Path == "/api/nasa/topics" || r.URL.Path == "/api/nasa/topics/" {
+			nasa.GetTopics(feedUrls, w)
+		} else {
+			topic := strings.Split(r.URL.Path, "/")[4]
+			nasa.GetTopic(topic, feedUrls, w)
+		}
+
+	} else {
+		w.WriteHeader(http.StatusNotFound)
+	}
+
+	log.Printf("Request with UserAgent %s\n", r.UserAgent())
+
 	return
 }
