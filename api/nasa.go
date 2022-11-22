@@ -10,6 +10,8 @@ import (
 
 func Nasa(w http.ResponseWriter, r *http.Request) {
 
+	log.Printf("Request with UserAgent %s and Path %s\n", r.UserAgent(), r.URL.Path)
+	
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
@@ -27,8 +29,6 @@ func Nasa(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusNotFound)
 	}
-
-	log.Printf("Request with UserAgent %s\n", r.UserAgent())
 
 	return
 }
