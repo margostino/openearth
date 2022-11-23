@@ -3,7 +3,7 @@
     "silent": true
   },
   "functions": {
-    "api/some/nasa.go": {
+    "api/nasa/topics.go": {
       "memory": 1024,
       "maxDuration": 5
     }
