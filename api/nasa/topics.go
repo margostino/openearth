@@ -1,4 +1,4 @@
-package handler
+package nasa
 
 import (
 	"github.com/margostino/earth-station-api/config"
@@ -16,10 +16,10 @@ func Nasa(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 
-	if true || r.URL.Path == "/api/nasa/topics" || strings.HasPrefix(r.URL.Path, "/api/nasa/topics/") {
+	if r.URL.Path == "/api/nasa/topics" || strings.HasPrefix(r.URL.Path, "/api/nasa/topics/") {
 		feedUrls := config.GetUrls()
 
-		if true || r.URL.Path == "/api/nasa/topics" || r.URL.Path == "/api/nasa/topics/" {
+		if r.URL.Path == "/api/nasa/topics" || r.URL.Path == "/api/nasa/topics/" {
 			nasa.GetTopics(feedUrls, w)
 		} else {
 			topic := strings.Split(r.URL.Path, "/")[4]

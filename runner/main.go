@@ -1,7 +1,7 @@
 package main
 
 import (
-	handler "github.com/margostino/earth-station-api/api"
+	handler "github.com/margostino/earth-station-api/api/nasa"
 	"log"
 	"net/http"
 )
