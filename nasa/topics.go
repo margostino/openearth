@@ -5,6 +5,8 @@ import (
 	"github.com/mmcdole/gofeed"
 	"log"
 	"net/http"
+	"reflect"
+	"strings"
 )
 
 func GetTopics(feedUrls map[string]string, writer http.ResponseWriter) {
@@ -23,14 +25,16 @@ func GetTopic(topic string, feedUrls map[string]string, writer http.ResponseWrit
 	feed, _ := fp.ParseURL(feedUrl)
 	if feed != nil {
 		for _, entry := range feed.Items {
+
+			element := reflect.ValueOf(entry).Elem()
 			item := make(map[string]interface{})
-			item["title"] = entry.Title
-			item["description"] = entry.Description
-			item["content"] = entry.Content
-			item["link"] = entry.Link
-			item["updated"] = entry.Updated
-			item["published"] = entry.PublishedParsed.String()
-			item["authors"] = entry.Authors
+
+			for i := 0; i < element.NumField(); i++ {
+				fieldName := element.Type().Field(i).Name
+				fieldValue := element.Field(i).Interface()
+				item[strings.ToLower(fieldName)] = fieldValue
+			}
+
 			items = append(items, item)
 		}
 	} else {
