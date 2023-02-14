@@ -1,4 +1,4 @@
-# earth-station-api
+# OpenEarth
 
 PoC
 
