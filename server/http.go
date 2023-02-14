@@ -2,7 +2,7 @@ package server
 
 import (
 	"encoding/json"
-	"github.com/margostino/earth-station-api/common"
+	"github.com/margostino/openearth/common"
 	"net/http"
 )
 
