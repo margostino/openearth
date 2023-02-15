@@ -2,20 +2,16 @@
 
 package model
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+type Dataset struct {
+	ID          string         `json:"id"`
+	Name        string         `json:"name"`
+	Description string         `json:"description"`
+	Source      *DatasetSource `json:"source"`
+	URL         string         `json:"url"`
+	LastUpdated string         `json:"last_updated"`
 }
 
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
-	Name string `json:"name"`
-}
-
-type User struct {
-	ID   string `json:"id"`
+type DatasetSource struct {
+	URL  string `json:"url"`
 	Name string `json:"name"`
 }

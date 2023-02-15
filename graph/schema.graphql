@@ -1,25 +1,19 @@
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+scalar Date
+
+type DatasetSource {
+  url: String!
   name: String!
 }
 
-type User {
+type Dataset {
   id: ID!
   name: String!
+  description: String!
+  source: DatasetSource!
+  url: String!
+  last_updated: Date!
 }
 
 type Query {
-  todos: [Todo!]!
-}
-
-input NewTodo {
-  text: String!
-  userId: String!
-}
-
-type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  datasets: [Dataset!]!
 }

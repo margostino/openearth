@@ -6,35 +6,22 @@ package graph
 
 import (
 	"context"
-	"crypto/rand"
-	"fmt"
-	"math/big"
 
 	"github.com/margostino/openearth/graph/model"
 )
 
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	rand, _ := rand.Int(rand.Reader, big.NewInt(100))
-	todo := &model.Todo{
-		Text: input.Text,
-		ID:   fmt.Sprintf("T%d", rand),
-		User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
+// Datasets is the resolver for the datasets field.
+func (r *queryResolver) Datasets(ctx context.Context) ([]*model.Dataset, error) {
+	datasetMock := &model.Dataset{
+		ID:          "mock",
+		Name:        "Mock dataset",
+		Description: "This is a mock",
 	}
-	r.todos = append(r.todos, todo)
-	return todo, nil
+	datasets := []*model.Dataset{datasetMock}
+	return datasets, nil
 }
-
-// Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	return r.todos, nil
-}
-
-// Mutation returns MutationResolver implementation.
-func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
-type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
