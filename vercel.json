@@ -3,9 +3,15 @@
     "silent": true
   },
   "functions": {
-    "api/nasa/topics.go": {
+    "api/query.go": {
       "memory": 1024,
-      "maxDuration": 5
+      "maxDuration": 5,
+      "includeFiles": "_files/**"
+    },
+    "api/playground.go": {
+      "memory": 1024,
+      "maxDuration": 5,
+      "includeFiles": "_files/**"
     }
   }
 }
