@@ -45,8 +45,15 @@ type DirectiveRoot struct {
 type ComplexityRoot struct {
 	Dataset struct {
 		Description func(childComplexity int) int
+		LastUpdated func(childComplexity int) int
 		Name        func(childComplexity int) int
+		Source      func(childComplexity int) int
 		URL         func(childComplexity int) int
+	}
+
+	DatasetSource struct {
+		Name func(childComplexity int) int
+		URL  func(childComplexity int) int
 	}
 
 	Query struct {
@@ -80,6 +87,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Dataset.Description(childComplexity), true
 
+	case "Dataset.last_updated":
+		if e.complexity.Dataset.LastUpdated == nil {
+			break
+		}
+
+		return e.complexity.Dataset.LastUpdated(childComplexity), true
+
 	case "Dataset.name":
 		if e.complexity.Dataset.Name == nil {
 			break
@@ -87,12 +101,33 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Dataset.Name(childComplexity), true
 
+	case "Dataset.source":
+		if e.complexity.Dataset.Source == nil {
+			break
+		}
+
+		return e.complexity.Dataset.Source(childComplexity), true
+
 	case "Dataset.url":
 		if e.complexity.Dataset.URL == nil {
 			break
 		}
 
 		return e.complexity.Dataset.URL(childComplexity), true
+
+	case "DatasetSource.name":
+		if e.complexity.DatasetSource.Name == nil {
+			break
+		}
+
+		return e.complexity.DatasetSource.Name(childComplexity), true
+
+	case "DatasetSource.url":
+		if e.complexity.DatasetSource.URL == nil {
+			break
+		}
+
+		return e.complexity.DatasetSource.URL(childComplexity), true
 
 	case "Query.datasets":
 		if e.complexity.Query.Datasets == nil {
@@ -313,6 +348,56 @@ func (ec *executionContext) fieldContext_Dataset_description(ctx context.Context
 	return fc, nil
 }
 
+func (ec *executionContext) _Dataset_source(ctx context.Context, field graphql.CollectedField, obj *model.Dataset) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Dataset_source(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Source, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.DatasetSource)
+	fc.Result = res
+	return ec.marshalNDatasetSource2ᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐDatasetSource(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Dataset_source(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Dataset",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "url":
+				return ec.fieldContext_DatasetSource_url(ctx, field)
+			case "name":
+				return ec.fieldContext_DatasetSource_name(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type DatasetSource", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Dataset_url(ctx context.Context, field graphql.CollectedField, obj *model.Dataset) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Dataset_url(ctx, field)
 	if err != nil {
@@ -347,6 +432,138 @@ func (ec *executionContext) _Dataset_url(ctx context.Context, field graphql.Coll
 func (ec *executionContext) fieldContext_Dataset_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Dataset",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Dataset_last_updated(ctx context.Context, field graphql.CollectedField, obj *model.Dataset) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Dataset_last_updated(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.LastUpdated, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNDate2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Dataset_last_updated(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Dataset",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Date does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DatasetSource_url(ctx context.Context, field graphql.CollectedField, obj *model.DatasetSource) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DatasetSource_url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DatasetSource_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DatasetSource",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DatasetSource_name(ctx context.Context, field graphql.CollectedField, obj *model.DatasetSource) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DatasetSource_name(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Name, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DatasetSource_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DatasetSource",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -399,8 +616,12 @@ func (ec *executionContext) fieldContext_Query_datasets(ctx context.Context, fie
 				return ec.fieldContext_Dataset_name(ctx, field)
 			case "description":
 				return ec.fieldContext_Dataset_description(ctx, field)
+			case "source":
+				return ec.fieldContext_Dataset_source(ctx, field)
 			case "url":
 				return ec.fieldContext_Dataset_url(ctx, field)
+			case "last_updated":
+				return ec.fieldContext_Dataset_last_updated(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Dataset", field.Name)
 		},
@@ -2340,9 +2561,58 @@ func (ec *executionContext) _Dataset(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
+		case "source":
+
+			out.Values[i] = ec._Dataset_source(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
 		case "url":
 
 			out.Values[i] = ec._Dataset_url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "last_updated":
+
+			out.Values[i] = ec._Dataset_last_updated(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
+var datasetSourceImplementors = []string{"DatasetSource"}
+
+func (ec *executionContext) _DatasetSource(ctx context.Context, sel ast.SelectionSet, obj *model.DatasetSource) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, datasetSourceImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DatasetSource")
+		case "url":
+
+			out.Values[i] = ec._DatasetSource_url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "name":
+
+			out.Values[i] = ec._DatasetSource_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -2801,6 +3071,31 @@ func (ec *executionContext) marshalNDataset2ᚖgithubᚗcomᚋmargostinoᚋopene
 		return graphql.Null
 	}
 	return ec._Dataset(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDatasetSource2ᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐDatasetSource(ctx context.Context, sel ast.SelectionSet, v *model.DatasetSource) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DatasetSource(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNDate2string(ctx context.Context, v interface{}) (string, error) {
+	res, err := graphql.UnmarshalString(v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNDate2string(ctx context.Context, sel ast.SelectionSet, v string) graphql.Marshaler {
+	res := graphql.MarshalString(v)
+	if res == graphql.Null {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+	}
+	return res
 }
 
 func (ec *executionContext) unmarshalNString2string(ctx context.Context, v interface{}) (string, error) {
