@@ -3,9 +3,7 @@
 package model
 
 type Dataset struct {
-	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	URL         string `json:"url"`
-	LastUpdated string `json:"last_updated"`
 }

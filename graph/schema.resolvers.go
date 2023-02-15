@@ -13,7 +13,6 @@ import (
 // Datasets is the resolver for the datasets field.
 func (r *queryResolver) Datasets(ctx context.Context) ([]*model.Dataset, error) {
 	datasetMock := &model.Dataset{
-		ID:          "mock",
 		Name:        "Mock dataset",
 		Description: "This is a mock",
 	}
