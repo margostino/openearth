@@ -1,12 +1,9 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
-
 type Todo {
   id: ID!
   text: String!
   done: Boolean!
   user: User!
+  name: String!
 }
 
 type User {

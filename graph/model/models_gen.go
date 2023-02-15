@@ -12,6 +12,7 @@ type Todo struct {
 	Text string `json:"text"`
 	Done bool   `json:"done"`
 	User *User  `json:"user"`
+	Name string `json:"name"`
 }
 
 type User struct {
