@@ -1,15 +1,15 @@
 scalar Date
 
-type DatasetSource {
-  url: String!
-  name: String!
-}
+#type DatasetSource {
+#  url: String!
+#  name: String!
+#}
 
 type Dataset {
   id: ID!
   name: String!
   description: String!
-  source: DatasetSource!
+#  source: DatasetSource!
   url: String!
   last_updated: Date!
 }
