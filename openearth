@@ -1,0 +1,33 @@
+#!/bin/bash
+
+command=$1
+shift
+
+case ${command} in
+"vercel-pull")
+  vercel pull
+  ;;
+
+"vercel-dev")
+  vercel dev
+  ;;
+
+"run")
+  go run runner/main.go
+  ;;
+
+"generate-schema")
+  go get github.com/99designs/gqlgen
+  go run github.com/99designs/gqlgen generate
+  ;;
+
+"schema-recovery")
+  git checkout -m graph/generated.go
+	git checkout -m graph/model/models_gen.go
+  ;;
+
+*)
+  echo 'Invalid OpenEarth command'
+  exit 1
+  ;;
+esac

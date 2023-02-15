@@ -3,7 +3,6 @@ package handler
 import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/margostino/openearth/graph"
-	"github.com/margostino/openearth/graph/generated"
 	"net/http"
 )
 
@@ -15,6 +14,6 @@ func Query(w http.ResponseWriter, r *http.Request) {
 }
 
 func newServer() *handler.Server {
-	c := generated.Config{Resolvers: &graph.Resolver{}}
-	return handler.NewDefaultServer(generated.NewExecutableSchema(c))
+	c := graph.Config{Resolvers: &graph.Resolver{}}
+	return handler.NewDefaultServer(graph.NewExecutableSchema(c))
 }
