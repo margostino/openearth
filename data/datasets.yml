@@ -1,0 +1,8 @@
+- name: Solid Earth
+  url: https://www.earthdata.nasa.gov/topics/solid-earth
+  rss: https://www.earthdata.nasa.gov/topics/rss/Solid%20Earth
+  description: >
+    Processes occurring deep within Earth constantly are shaping landforms. Although originating from below the surface, these processes can be analyzed from ground, air, or space-based measurements.
+    We live on a restless planet: tectonic plates shift, coasts erode, and volcanoes erupt. These changes happen on longer geologic timescales and in sudden, catastrophic moments.
+    Earth is continually influenced by the Sun, gravitational forces, processes emanating from deep within the core, and by complex interactions with the ocean and atmosphere. Understanding these dynamics is critical for developing an interconnected view of Earth science. Although many solid Earth processes originate from below Earth’s surface, they can be analyzed using measurements from ground, air, or space-based instruments. NASA gravity, geomagnetism, tectonics, and ground motion data provide insight into landscape changes, water resources, and the effects of global climate change. 
+    These data also provide timely information to first responders during disasters.

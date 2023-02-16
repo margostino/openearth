@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/margostino/openearth/cache"
 	"github.com/margostino/openearth/common"
 	"github.com/margostino/openearth/metrics"
 	"github.com/margostino/openearth/utils"
@@ -26,13 +27,13 @@ func Fetch(ctx context.Context, entity string, year int, response any) (map[stri
 	log.Printf("Query for dataset %s with entity [%s] and year [%s]\n", dataset, entity, yearAsString)
 	go metrics.PublishQuery(ctx)
 
-	if value, ok := datasetCache[dataset]; ok {
+	if value, ok := cache.datasetCache[dataset]; ok {
 		if result, ok := value.Index[dataKey]; ok {
 			log.Println("Results from cache")
 			results = result.Row
 		}
 	} else {
-		url := indexCache[dataset]
+		url := cache.indexCache[dataset]
 		data, err := fetchCSVFromUrl(url)
 		common.Check(err)
 
@@ -60,7 +61,7 @@ func Fetch(ctx context.Context, entity string, year int, response any) (map[stri
 				datasetIndex := DatasetIndex{
 					Index: datasetMapping,
 				}
-				datasetCache[dataset] = datasetIndex
+				cache.datasetCache[dataset] = datasetIndex
 				log.Printf("New entry in cache for dataset %s and entity %s and year %s\n", dataset, entity, yearAsString)
 			}
 		}

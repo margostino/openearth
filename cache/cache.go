@@ -1,14 +1,15 @@
-package fetcher
+package cache
 
 import (
 	"fmt"
 	"github.com/margostino/openearth/common"
+	"github.com/margostino/openearth/fetcher"
 	"io"
 	"net/http"
 	"os"
 )
 
-var datasetCache = make(map[string]DatasetIndex)
+var datasetCache = make(map[string]fetcher.DatasetIndex)
 var indexCache = loadIndex()
 
 func loadIndex() map[string]string {

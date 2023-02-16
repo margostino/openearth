@@ -6,7 +6,7 @@ type DatasetSource {
 }
 
 type Dataset {
-#  id: ID!
+  id: ID!
   name: String!
   description: String!
   source: DatasetSource!
