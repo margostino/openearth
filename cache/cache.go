@@ -3,8 +3,11 @@ package cache
 import (
 	"fmt"
 	"github.com/margostino/openearth/common"
+	"github.com/margostino/openearth/config"
 	"github.com/margostino/openearth/graph/model"
+	"gopkg.in/yaml.v3"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 )
@@ -18,19 +21,28 @@ var index = load()
 
 func load() map[string]interface{} {
 	var cache = make(map[string]any)
-	baseUrl := os.Getenv("DATA_URL")
+	var bytes []byte
+	var err error
+	baseDataPath := os.Getenv("DATA_PATH")
 
 	for key, value := range indexes {
-		url := fmt.Sprintf("%s/%s.yml", baseUrl, key)
-		resp, err := http.Get(url)
+		location := fmt.Sprintf("%s/%s.yml", baseDataPath, key)
 
-		if !common.IsError(err, fmt.Sprintf("when fetching data for %s", key)) && resp.StatusCode == 200 {
-			bytes, err := io.ReadAll(resp.Body)
-			if !common.IsError(err, fmt.Sprintf("when reading data response for %s", key)) {
-				common.UnmarshalYamlBytes(bytes, &value)
+		if config.IsDevEnv() {
+			bytes, err = ioutil.ReadFile(location)
+		} else {
+			resp, err := http.Get(location)
+			if !common.IsError(err, fmt.Sprintf("when fetching data for %s", key)) && resp.StatusCode == 200 {
+				bytes, err = io.ReadAll(resp.Body)
+				resp.Body.Close()
+			}
+		}
+
+		if !common.IsError(err, fmt.Sprintf("when reading data for %s", key)) && bytes != nil {
+			err = yaml.Unmarshal(bytes, &value)
+			if !common.IsError(err, "when unmarshaling YAML data") {
 				cache[key] = value
 			}
-			resp.Body.Close()
 		}
 
 	}
@@ -38,6 +50,6 @@ func load() map[string]interface{} {
 	return cache
 }
 
-func GetIndexBy(key string) interface{} {
+func GetData(key string) interface{} {
 	return index[key]
 }
