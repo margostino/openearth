@@ -6,18 +6,14 @@ package graph
 
 import (
 	"context"
+	"github.com/margostino/openearth/fetcher"
 
 	"github.com/margostino/openearth/graph/model"
 )
 
 // Datasets is the resolver for the datasets field.
-func (r *queryResolver) Datasets(ctx context.Context) ([]*model.Dataset, error) {
-	datasetMock := &model.Dataset{
-		Name:        "Mock dataset",
-		Description: "This is a mock",
-	}
-	datasets := []*model.Dataset{datasetMock}
-	return datasets, nil
+func (r *queryResolver) Datasets(ctx context.Context, id *string, name *string, category *string) ([]*model.Dataset, error) {
+	return fetcher.FetchDatasets(id, name, category)
 }
 
 // Query returns QueryResolver implementation.

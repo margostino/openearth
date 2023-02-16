@@ -9,11 +9,12 @@ type Dataset {
   id: ID!
   name: String!
   description: String!
+  category: String!
   source: DatasetSource!
   url: String!
   last_updated: Date!
 }
 
 type Query {
-  datasets: [Dataset!]!
+  datasets(id: ID, name: String, category: String): [Dataset!]!
 }

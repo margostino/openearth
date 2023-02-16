@@ -1,6 +1,9 @@
 - name: Solid Earth
   url: https://www.earthdata.nasa.gov/topics/solid-earth
-  rss: https://www.earthdata.nasa.gov/topics/rss/Solid%20Earth
+  category: earth_science
+  source:
+    url: https://www.earthdata.nasa.gov
+    name: nasa
   description: >
     Processes occurring deep within Earth constantly are shaping landforms. Although originating from below the surface, these processes can be analyzed from ground, air, or space-based measurements.
     We live on a restless planet: tectonic plates shift, coasts erode, and volcanoes erupt. These changes happen on longer geologic timescales and in sudden, catastrophic moments.
