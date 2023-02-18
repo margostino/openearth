@@ -1,0 +1,3 @@
+aws s3 ls --no-sign-request s3://sentinel-inventory/sentinel-s1-l1c/sentinel-s1-l1c-inventory
+
+pipreqs . --force

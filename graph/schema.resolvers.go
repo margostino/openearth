@@ -6,8 +6,8 @@ package graph
 
 import (
 	"context"
-	"github.com/margostino/openearth/fetcher"
 
+	"github.com/margostino/openearth/fetcher"
 	"github.com/margostino/openearth/graph/model"
 )
 
