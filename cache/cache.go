@@ -19,9 +19,9 @@ const (
 )
 
 var indexes = map[string]any{
-	"datasets":       &model.Dataset{},
-	"nasa_earthdata": &model.NasaEarthData{},
-	"companies":      &model.DatasetSource{},
+	Datasets:      &model.Dataset{},
+	NasaEarthData: &model.NasaEarthData{},
+	NasaRssFeeds:  &model.NasaRssFeed{},
 }
 
 var index = load()

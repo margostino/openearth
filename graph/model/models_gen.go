@@ -31,3 +31,9 @@ type NasaEarthDataTopic struct {
 	Description string                `json:"Description"`
 	Subtopics   []*NasaEarthDataTopic `json:"Subtopics"`
 }
+
+type NasaRssFeed struct {
+	FeedType string `json:"FeedType"`
+	Name     string `json:"Name"`
+	URL      string `json:"Url"`
+}

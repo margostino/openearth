@@ -1,36 +1,43 @@
 scalar Date
 
 type DatasetSource {
-  url: String!
-  name: String!
+    url: String!
+    name: String!
 }
 
 type Dataset {
-  id: ID!
-  name: String!
-  description: String!
-  category: String!
-  source: DatasetSource!
-  url: String!
-  last_updated: Date!
+    id: ID!
+    name: String!
+    description: String!
+    category: String!
+    source: DatasetSource!
+    url: String!
+    last_updated: Date!
+}
+
+type NasaRssFeed {
+    FeedType: String!
+    Name: String!
+    Url: String!
 }
 
 type NasaEarthDataTopic {
-  Name: String!
-  Url: String!
-  Rss: String!
-  Description: String!
-  Subtopics: [NasaEarthDataTopic]
+    Name: String!
+    Url: String!
+    Rss: String!
+    Description: String!
+    Subtopics: [NasaEarthDataTopic]
 }
 
 type NasaEarthData {
-  Url: String!
-  Rss: String!
-  Description: String!
-  Topics: [NasaEarthDataTopic!]!
+    Url: String!
+    Rss: String!
+    Description: String!
+    Topics: [NasaEarthDataTopic!]!
 }
 
 type Query {
-  datasets(id: ID, name: String, category: String): [Dataset!]!
-  nasa_earthdata(topicName: String): NasaEarthData!
+    datasets(id: ID, name: String, category: String): [Dataset!]!
+    nasa_earthdata(topicName: String): NasaEarthData!
+    nasa_rss_feeds: [NasaRssFeed!]!
 }

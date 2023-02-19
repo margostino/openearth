@@ -73,15 +73,23 @@ type ComplexityRoot struct {
 		URL         func(childComplexity int) int
 	}
 
+	NasaRssFeed struct {
+		FeedType func(childComplexity int) int
+		Name     func(childComplexity int) int
+		URL      func(childComplexity int) int
+	}
+
 	Query struct {
 		Datasets      func(childComplexity int, id *string, name *string, category *string) int
 		NasaEarthdata func(childComplexity int, topicName *string) int
+		NasaRssFeeds  func(childComplexity int) int
 	}
 }
 
 type QueryResolver interface {
 	Datasets(ctx context.Context, id *string, name *string, category *string) ([]*model.Dataset, error)
 	NasaEarthdata(ctx context.Context, topicName *string) (*model.NasaEarthData, error)
+	NasaRssFeeds(ctx context.Context) ([]*model.NasaRssFeed, error)
 }
 
 type executableSchema struct {
@@ -225,6 +233,27 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.NasaEarthDataTopic.URL(childComplexity), true
 
+	case "NasaRssFeed.FeedType":
+		if e.complexity.NasaRssFeed.FeedType == nil {
+			break
+		}
+
+		return e.complexity.NasaRssFeed.FeedType(childComplexity), true
+
+	case "NasaRssFeed.Name":
+		if e.complexity.NasaRssFeed.Name == nil {
+			break
+		}
+
+		return e.complexity.NasaRssFeed.Name(childComplexity), true
+
+	case "NasaRssFeed.Url":
+		if e.complexity.NasaRssFeed.URL == nil {
+			break
+		}
+
+		return e.complexity.NasaRssFeed.URL(childComplexity), true
+
 	case "Query.datasets":
 		if e.complexity.Query.Datasets == nil {
 			break
@@ -248,6 +277,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.NasaEarthdata(childComplexity, args["topicName"].(*string)), true
+
+	case "Query.nasa_rss_feeds":
+		if e.complexity.Query.NasaRssFeeds == nil {
+			break
+		}
+
+		return e.complexity.Query.NasaRssFeeds(childComplexity), true
 
 	}
 	return 0, false
@@ -1240,6 +1276,138 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Subtopics(ctx contex
 	return fc, nil
 }
 
+func (ec *executionContext) _NasaRssFeed_FeedType(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaRssFeed_FeedType(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.FeedType, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_NasaRssFeed_FeedType(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "NasaRssFeed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _NasaRssFeed_Name(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaRssFeed_Name(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Name, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_NasaRssFeed_Name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "NasaRssFeed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _NasaRssFeed_Url(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaRssFeed_Url(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.URL, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_NasaRssFeed_Url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "NasaRssFeed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Query_datasets(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Query_datasets(ctx, field)
 	if err != nil {
@@ -1370,6 +1538,57 @@ func (ec *executionContext) fieldContext_Query_nasa_earthdata(ctx context.Contex
 	if fc.Args, err = ec.field_Query_nasa_earthdata_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_nasa_rss_feeds(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_nasa_rss_feeds(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().NasaRssFeeds(rctx)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.NasaRssFeed)
+	fc.Result = res
+	return ec.marshalNNasaRssFeed2ᚕᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐNasaRssFeedᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_nasa_rss_feeds(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "FeedType":
+				return ec.fieldContext_NasaRssFeed_FeedType(ctx, field)
+			case "Name":
+				return ec.fieldContext_NasaRssFeed_Name(ctx, field)
+			case "Url":
+				return ec.fieldContext_NasaRssFeed_Url(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type NasaRssFeed", field.Name)
+		},
 	}
 	return fc, nil
 }
@@ -3489,6 +3708,48 @@ func (ec *executionContext) _NasaEarthDataTopic(ctx context.Context, sel ast.Sel
 	return out
 }
 
+var nasaRssFeedImplementors = []string{"NasaRssFeed"}
+
+func (ec *executionContext) _NasaRssFeed(ctx context.Context, sel ast.SelectionSet, obj *model.NasaRssFeed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, nasaRssFeedImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("NasaRssFeed")
+		case "FeedType":
+
+			out.Values[i] = ec._NasaRssFeed_FeedType(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "Name":
+
+			out.Values[i] = ec._NasaRssFeed_Name(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "Url":
+
+			out.Values[i] = ec._NasaRssFeed_Url(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var queryImplementors = []string{"Query"}
 
 func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) graphql.Marshaler {
@@ -3537,6 +3798,26 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_nasa_earthdata(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "nasa_rss_feeds":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_nasa_rss_feeds(ctx, field)
 				return res
 			}
 
@@ -4060,6 +4341,60 @@ func (ec *executionContext) marshalNNasaEarthDataTopic2ᚖgithubᚗcomᚋmargost
 		return graphql.Null
 	}
 	return ec._NasaEarthDataTopic(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNNasaRssFeed2ᚕᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐNasaRssFeedᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.NasaRssFeed) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNNasaRssFeed2ᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐNasaRssFeed(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNNasaRssFeed2ᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐNasaRssFeed(ctx context.Context, sel ast.SelectionSet, v *model.NasaRssFeed) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._NasaRssFeed(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNString2string(ctx context.Context, v interface{}) (string, error) {

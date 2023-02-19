@@ -13,7 +13,7 @@ func matchStringFor(expected *string, current string) bool {
 
 func FetchDatasets(id *string, name *string, category *string) ([]*model.Dataset, error) {
 	var datasets []*model.Dataset
-	values := cache.GetData("datasets").([]interface{})
+	values := cache.GetData(cache.Datasets).([]interface{})
 	for _, value := range values {
 		dataset := model.Dataset{}
 		data, _ := json.Marshal(value)
@@ -25,10 +25,17 @@ func FetchDatasets(id *string, name *string, category *string) ([]*model.Dataset
 	}
 	return datasets, nil
 }
+func FetchNasaRssFeeds() ([]*model.NasaRssFeed, error) {
+	var nasaRssFeeds []*model.NasaRssFeed
+	data := cache.GetData(cache.NasaRssFeeds).([]interface{})
+	bytes, _ := json.Marshal(data)
+	json.Unmarshal(bytes, &nasaRssFeeds)
+	return nasaRssFeeds, nil
+}
 
 func FetchNasaEarthData(topicName *string) (*model.NasaEarthData, error) {
 	var cachedNasaEarthData *model.NasaEarthData
-	data := cache.GetData("nasa_earthdata").(map[string]interface{})
+	data := cache.GetData(cache.NasaEarthData).(map[string]interface{})
 	bytes, _ := json.Marshal(data)
 	json.Unmarshal(bytes, &cachedNasaEarthData)
 

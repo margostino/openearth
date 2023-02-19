@@ -6,7 +6,6 @@ package graph
 
 import (
 	"context"
-
 	"github.com/margostino/openearth/fetcher"
 	"github.com/margostino/openearth/graph/model"
 )
@@ -19,6 +18,11 @@ func (r *queryResolver) Datasets(ctx context.Context, id *string, name *string, 
 // NasaEarthdata is the resolver for the nasa_earthdata field.
 func (r *queryResolver) NasaEarthdata(ctx context.Context, topicName *string) (*model.NasaEarthData, error) {
 	return fetcher.FetchNasaEarthData(topicName)
+}
+
+// NasaRssFeeds is the resolver for the nasa_rss_feeds field.
+func (r *queryResolver) NasaRssFeeds(ctx context.Context) ([]*model.NasaRssFeed, error) {
+	return fetcher.FetchNasaRssFeeds()
 }
 
 // Query returns QueryResolver implementation.
