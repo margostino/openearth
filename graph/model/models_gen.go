@@ -16,3 +16,18 @@ type DatasetSource struct {
 	URL  string `json:"url"`
 	Name string `json:"name"`
 }
+
+type NasaEarthData struct {
+	URL         string                `json:"Url"`
+	Rss         string                `json:"Rss"`
+	Description string                `json:"Description"`
+	Topics      []*NasaEarthDataTopic `json:"Topics"`
+}
+
+type NasaEarthDataTopic struct {
+	Name        string                `json:"Name"`
+	URL         string                `json:"Url"`
+	Rss         string                `json:"Rss"`
+	Description string                `json:"Description"`
+	Subtopics   []*NasaEarthDataTopic `json:"Subtopics"`
+}

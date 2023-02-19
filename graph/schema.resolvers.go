@@ -16,6 +16,11 @@ func (r *queryResolver) Datasets(ctx context.Context, id *string, name *string, 
 	return fetcher.FetchDatasets(id, name, category)
 }
 
+// NasaEarthdata is the resolver for the nasa_earthdata field.
+func (r *queryResolver) NasaEarthdata(ctx context.Context, topicName *string) (*model.NasaEarthData, error) {
+	return fetcher.FetchNasaEarthData(topicName)
+}
+
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 

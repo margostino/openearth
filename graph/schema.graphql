@@ -15,6 +15,22 @@ type Dataset {
   last_updated: Date!
 }
 
+type NasaEarthDataTopic {
+  Name: String!
+  Url: String!
+  Rss: String!
+  Description: String!
+  Subtopics: [NasaEarthDataTopic]
+}
+
+type NasaEarthData {
+  Url: String!
+  Rss: String!
+  Description: String!
+  Topics: [NasaEarthDataTopic!]!
+}
+
 type Query {
   datasets(id: ID, name: String, category: String): [Dataset!]!
+  nasa_earthdata(topicName: String): NasaEarthData!
 }

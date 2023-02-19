@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/margostino/openearth/cache"
 	"github.com/margostino/openearth/graph/model"
+	"strings"
 )
 
 func matchStringFor(expected *string, current string) bool {
@@ -23,4 +24,43 @@ func FetchDatasets(id *string, name *string, category *string) ([]*model.Dataset
 		}
 	}
 	return datasets, nil
+}
+
+func FetchNasaEarthData(topicName *string) (*model.NasaEarthData, error) {
+	var cachedNasaEarthData *model.NasaEarthData
+	data := cache.GetData("nasa_earthdata").(map[string]interface{})
+	bytes, _ := json.Marshal(data)
+	json.Unmarshal(bytes, &cachedNasaEarthData)
+
+	var topics []*model.NasaEarthDataTopic
+
+	if topicName == nil {
+		topics = cachedNasaEarthData.Topics
+	} else {
+		topics = make([]*model.NasaEarthDataTopic, 0)
+	}
+
+	for _, topic := range cachedNasaEarthData.Topics {
+		if topicName != nil && strings.ToLower(*topicName) == strings.ToLower(topic.Name) {
+			topics = append(topics, topic)
+		}
+	}
+
+	nasaEarthData := &model.NasaEarthData{
+		URL:         cachedNasaEarthData.URL,
+		Rss:         cachedNasaEarthData.Rss,
+		Description: cachedNasaEarthData.Description,
+		Topics:      topics,
+	}
+
+	//for _, value := range values {
+	//	dataset := model.Dataset{}
+	//	data, _ := json.Marshal(value)
+	//	json.Unmarshal(data, &dataset)
+	//
+	//	//if matchStringFor(id, dataset.ID) && matchStringFor(name, dataset.Name) && matchStringFor(category, dataset.Category) {
+	//	//	datasets = append(datasets, &dataset)
+	//	//}
+	//}
+	return nasaEarthData, nil
 }
