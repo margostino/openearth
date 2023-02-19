@@ -18,22 +18,22 @@ type DatasetSource struct {
 }
 
 type NasaEarthData struct {
-	URL         string                `json:"Url"`
-	Rss         string                `json:"Rss"`
-	Description string                `json:"Description"`
-	Topics      []*NasaEarthDataTopic `json:"Topics"`
+	URL         string                `json:"url"`
+	Rss         string                `json:"rss"`
+	Description string                `json:"description"`
+	Topics      []*NasaEarthDataTopic `json:"topics"`
 }
 
 type NasaEarthDataTopic struct {
-	Name        string                `json:"Name"`
-	URL         string                `json:"Url"`
-	Rss         string                `json:"Rss"`
-	Description string                `json:"Description"`
-	Subtopics   []*NasaEarthDataTopic `json:"Subtopics"`
+	Name        string                `json:"name"`
+	URL         string                `json:"url"`
+	Rss         string                `json:"rss"`
+	Description string                `json:"description"`
+	Subtopics   []*NasaEarthDataTopic `json:"subtopics"`
 }
 
 type NasaRssFeed struct {
-	FeedType string `json:"FeedType"`
-	Name     string `json:"Name"`
-	URL      string `json:"Url"`
+	FeedType string `json:"feed_type"`
+	Name     string `json:"name"`
+	URL      string `json:"url"`
 }

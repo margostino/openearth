@@ -16,24 +16,24 @@ type Dataset {
 }
 
 type NasaRssFeed {
-    FeedType: String!
-    Name: String!
-    Url: String!
+    feed_type: String!
+    name: String!
+    url: String!
 }
 
 type NasaEarthDataTopic {
-    Name: String!
-    Url: String!
-    Rss: String!
-    Description: String!
-    Subtopics: [NasaEarthDataTopic]
+    name: String!
+    url: String!
+    rss: String!
+    description: String!
+    subtopics: [NasaEarthDataTopic]
 }
 
 type NasaEarthData {
-    Url: String!
-    Rss: String!
-    Description: String!
-    Topics: [NasaEarthDataTopic!]!
+    url: String!
+    rss: String!
+    description: String!
+    topics: [NasaEarthDataTopic!]!
 }
 
 type Query {

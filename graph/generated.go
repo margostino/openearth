@@ -170,84 +170,84 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.DatasetSource.URL(childComplexity), true
 
-	case "NasaEarthData.Description":
+	case "NasaEarthData.description":
 		if e.complexity.NasaEarthData.Description == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthData.Description(childComplexity), true
 
-	case "NasaEarthData.Rss":
+	case "NasaEarthData.rss":
 		if e.complexity.NasaEarthData.Rss == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthData.Rss(childComplexity), true
 
-	case "NasaEarthData.Topics":
+	case "NasaEarthData.topics":
 		if e.complexity.NasaEarthData.Topics == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthData.Topics(childComplexity), true
 
-	case "NasaEarthData.Url":
+	case "NasaEarthData.url":
 		if e.complexity.NasaEarthData.URL == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthData.URL(childComplexity), true
 
-	case "NasaEarthDataTopic.Description":
+	case "NasaEarthDataTopic.description":
 		if e.complexity.NasaEarthDataTopic.Description == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthDataTopic.Description(childComplexity), true
 
-	case "NasaEarthDataTopic.Name":
+	case "NasaEarthDataTopic.name":
 		if e.complexity.NasaEarthDataTopic.Name == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthDataTopic.Name(childComplexity), true
 
-	case "NasaEarthDataTopic.Rss":
+	case "NasaEarthDataTopic.rss":
 		if e.complexity.NasaEarthDataTopic.Rss == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthDataTopic.Rss(childComplexity), true
 
-	case "NasaEarthDataTopic.Subtopics":
+	case "NasaEarthDataTopic.subtopics":
 		if e.complexity.NasaEarthDataTopic.Subtopics == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthDataTopic.Subtopics(childComplexity), true
 
-	case "NasaEarthDataTopic.Url":
+	case "NasaEarthDataTopic.url":
 		if e.complexity.NasaEarthDataTopic.URL == nil {
 			break
 		}
 
 		return e.complexity.NasaEarthDataTopic.URL(childComplexity), true
 
-	case "NasaRssFeed.FeedType":
+	case "NasaRssFeed.feed_type":
 		if e.complexity.NasaRssFeed.FeedType == nil {
 			break
 		}
 
 		return e.complexity.NasaRssFeed.FeedType(childComplexity), true
 
-	case "NasaRssFeed.Name":
+	case "NasaRssFeed.name":
 		if e.complexity.NasaRssFeed.Name == nil {
 			break
 		}
 
 		return e.complexity.NasaRssFeed.Name(childComplexity), true
 
-	case "NasaRssFeed.Url":
+	case "NasaRssFeed.url":
 		if e.complexity.NasaRssFeed.URL == nil {
 			break
 		}
@@ -859,8 +859,8 @@ func (ec *executionContext) fieldContext_DatasetSource_name(ctx context.Context,
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthData_Url(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthData_Url(ctx, field)
+func (ec *executionContext) _NasaEarthData_url(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthData_url(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -890,7 +890,7 @@ func (ec *executionContext) _NasaEarthData_Url(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthData_Url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthData_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthData",
 		Field:      field,
@@ -903,8 +903,8 @@ func (ec *executionContext) fieldContext_NasaEarthData_Url(ctx context.Context, 
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthData_Rss(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthData_Rss(ctx, field)
+func (ec *executionContext) _NasaEarthData_rss(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthData_rss(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -934,7 +934,7 @@ func (ec *executionContext) _NasaEarthData_Rss(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthData_Rss(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthData_rss(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthData",
 		Field:      field,
@@ -947,8 +947,8 @@ func (ec *executionContext) fieldContext_NasaEarthData_Rss(ctx context.Context, 
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthData_Description(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthData_Description(ctx, field)
+func (ec *executionContext) _NasaEarthData_description(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthData_description(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -978,7 +978,7 @@ func (ec *executionContext) _NasaEarthData_Description(ctx context.Context, fiel
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthData_Description(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthData_description(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthData",
 		Field:      field,
@@ -991,8 +991,8 @@ func (ec *executionContext) fieldContext_NasaEarthData_Description(ctx context.C
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthData_Topics(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthData_Topics(ctx, field)
+func (ec *executionContext) _NasaEarthData_topics(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthData) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthData_topics(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1022,7 +1022,7 @@ func (ec *executionContext) _NasaEarthData_Topics(ctx context.Context, field gra
 	return ec.marshalNNasaEarthDataTopic2ᚕᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐNasaEarthDataTopicᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthData_Topics(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthData_topics(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthData",
 		Field:      field,
@@ -1030,16 +1030,16 @@ func (ec *executionContext) fieldContext_NasaEarthData_Topics(ctx context.Contex
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "Name":
-				return ec.fieldContext_NasaEarthDataTopic_Name(ctx, field)
-			case "Url":
-				return ec.fieldContext_NasaEarthDataTopic_Url(ctx, field)
-			case "Rss":
-				return ec.fieldContext_NasaEarthDataTopic_Rss(ctx, field)
-			case "Description":
-				return ec.fieldContext_NasaEarthDataTopic_Description(ctx, field)
-			case "Subtopics":
-				return ec.fieldContext_NasaEarthDataTopic_Subtopics(ctx, field)
+			case "name":
+				return ec.fieldContext_NasaEarthDataTopic_name(ctx, field)
+			case "url":
+				return ec.fieldContext_NasaEarthDataTopic_url(ctx, field)
+			case "rss":
+				return ec.fieldContext_NasaEarthDataTopic_rss(ctx, field)
+			case "description":
+				return ec.fieldContext_NasaEarthDataTopic_description(ctx, field)
+			case "subtopics":
+				return ec.fieldContext_NasaEarthDataTopic_subtopics(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type NasaEarthDataTopic", field.Name)
 		},
@@ -1047,8 +1047,8 @@ func (ec *executionContext) fieldContext_NasaEarthData_Topics(ctx context.Contex
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthDataTopic_Name(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthDataTopic_Name(ctx, field)
+func (ec *executionContext) _NasaEarthDataTopic_name(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthDataTopic_name(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1078,7 +1078,7 @@ func (ec *executionContext) _NasaEarthDataTopic_Name(ctx context.Context, field 
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthDataTopic_Name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthDataTopic_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthDataTopic",
 		Field:      field,
@@ -1091,8 +1091,8 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Name(ctx context.Con
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthDataTopic_Url(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthDataTopic_Url(ctx, field)
+func (ec *executionContext) _NasaEarthDataTopic_url(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthDataTopic_url(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1122,7 +1122,7 @@ func (ec *executionContext) _NasaEarthDataTopic_Url(ctx context.Context, field g
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthDataTopic_Url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthDataTopic_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthDataTopic",
 		Field:      field,
@@ -1135,8 +1135,8 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Url(ctx context.Cont
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthDataTopic_Rss(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthDataTopic_Rss(ctx, field)
+func (ec *executionContext) _NasaEarthDataTopic_rss(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthDataTopic_rss(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1166,7 +1166,7 @@ func (ec *executionContext) _NasaEarthDataTopic_Rss(ctx context.Context, field g
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthDataTopic_Rss(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthDataTopic_rss(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthDataTopic",
 		Field:      field,
@@ -1179,8 +1179,8 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Rss(ctx context.Cont
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthDataTopic_Description(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthDataTopic_Description(ctx, field)
+func (ec *executionContext) _NasaEarthDataTopic_description(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthDataTopic_description(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1210,7 +1210,7 @@ func (ec *executionContext) _NasaEarthDataTopic_Description(ctx context.Context,
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthDataTopic_Description(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthDataTopic_description(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthDataTopic",
 		Field:      field,
@@ -1223,8 +1223,8 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Description(ctx cont
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaEarthDataTopic_Subtopics(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaEarthDataTopic_Subtopics(ctx, field)
+func (ec *executionContext) _NasaEarthDataTopic_subtopics(ctx context.Context, field graphql.CollectedField, obj *model.NasaEarthDataTopic) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaEarthDataTopic_subtopics(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1251,7 +1251,7 @@ func (ec *executionContext) _NasaEarthDataTopic_Subtopics(ctx context.Context, f
 	return ec.marshalONasaEarthDataTopic2ᚕᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐNasaEarthDataTopic(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaEarthDataTopic_Subtopics(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaEarthDataTopic_subtopics(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaEarthDataTopic",
 		Field:      field,
@@ -1259,16 +1259,16 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Subtopics(ctx contex
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "Name":
-				return ec.fieldContext_NasaEarthDataTopic_Name(ctx, field)
-			case "Url":
-				return ec.fieldContext_NasaEarthDataTopic_Url(ctx, field)
-			case "Rss":
-				return ec.fieldContext_NasaEarthDataTopic_Rss(ctx, field)
-			case "Description":
-				return ec.fieldContext_NasaEarthDataTopic_Description(ctx, field)
-			case "Subtopics":
-				return ec.fieldContext_NasaEarthDataTopic_Subtopics(ctx, field)
+			case "name":
+				return ec.fieldContext_NasaEarthDataTopic_name(ctx, field)
+			case "url":
+				return ec.fieldContext_NasaEarthDataTopic_url(ctx, field)
+			case "rss":
+				return ec.fieldContext_NasaEarthDataTopic_rss(ctx, field)
+			case "description":
+				return ec.fieldContext_NasaEarthDataTopic_description(ctx, field)
+			case "subtopics":
+				return ec.fieldContext_NasaEarthDataTopic_subtopics(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type NasaEarthDataTopic", field.Name)
 		},
@@ -1276,8 +1276,8 @@ func (ec *executionContext) fieldContext_NasaEarthDataTopic_Subtopics(ctx contex
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaRssFeed_FeedType(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaRssFeed_FeedType(ctx, field)
+func (ec *executionContext) _NasaRssFeed_feed_type(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaRssFeed_feed_type(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1307,7 +1307,7 @@ func (ec *executionContext) _NasaRssFeed_FeedType(ctx context.Context, field gra
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaRssFeed_FeedType(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaRssFeed_feed_type(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaRssFeed",
 		Field:      field,
@@ -1320,8 +1320,8 @@ func (ec *executionContext) fieldContext_NasaRssFeed_FeedType(ctx context.Contex
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaRssFeed_Name(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaRssFeed_Name(ctx, field)
+func (ec *executionContext) _NasaRssFeed_name(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaRssFeed_name(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1351,7 +1351,7 @@ func (ec *executionContext) _NasaRssFeed_Name(ctx context.Context, field graphql
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaRssFeed_Name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaRssFeed_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaRssFeed",
 		Field:      field,
@@ -1364,8 +1364,8 @@ func (ec *executionContext) fieldContext_NasaRssFeed_Name(ctx context.Context, f
 	return fc, nil
 }
 
-func (ec *executionContext) _NasaRssFeed_Url(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_NasaRssFeed_Url(ctx, field)
+func (ec *executionContext) _NasaRssFeed_url(ctx context.Context, field graphql.CollectedField, obj *model.NasaRssFeed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_NasaRssFeed_url(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1395,7 +1395,7 @@ func (ec *executionContext) _NasaRssFeed_Url(ctx context.Context, field graphql.
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_NasaRssFeed_Url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_NasaRssFeed_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "NasaRssFeed",
 		Field:      field,
@@ -1516,14 +1516,14 @@ func (ec *executionContext) fieldContext_Query_nasa_earthdata(ctx context.Contex
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "Url":
-				return ec.fieldContext_NasaEarthData_Url(ctx, field)
-			case "Rss":
-				return ec.fieldContext_NasaEarthData_Rss(ctx, field)
-			case "Description":
-				return ec.fieldContext_NasaEarthData_Description(ctx, field)
-			case "Topics":
-				return ec.fieldContext_NasaEarthData_Topics(ctx, field)
+			case "url":
+				return ec.fieldContext_NasaEarthData_url(ctx, field)
+			case "rss":
+				return ec.fieldContext_NasaEarthData_rss(ctx, field)
+			case "description":
+				return ec.fieldContext_NasaEarthData_description(ctx, field)
+			case "topics":
+				return ec.fieldContext_NasaEarthData_topics(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type NasaEarthData", field.Name)
 		},
@@ -1580,12 +1580,12 @@ func (ec *executionContext) fieldContext_Query_nasa_rss_feeds(ctx context.Contex
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "FeedType":
-				return ec.fieldContext_NasaRssFeed_FeedType(ctx, field)
-			case "Name":
-				return ec.fieldContext_NasaRssFeed_Name(ctx, field)
-			case "Url":
-				return ec.fieldContext_NasaRssFeed_Url(ctx, field)
+			case "feed_type":
+				return ec.fieldContext_NasaRssFeed_feed_type(ctx, field)
+			case "name":
+				return ec.fieldContext_NasaRssFeed_name(ctx, field)
+			case "url":
+				return ec.fieldContext_NasaRssFeed_url(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type NasaRssFeed", field.Name)
 		},
@@ -3616,30 +3616,30 @@ func (ec *executionContext) _NasaEarthData(ctx context.Context, sel ast.Selectio
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("NasaEarthData")
-		case "Url":
+		case "url":
 
-			out.Values[i] = ec._NasaEarthData_Url(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "Rss":
-
-			out.Values[i] = ec._NasaEarthData_Rss(ctx, field, obj)
+			out.Values[i] = ec._NasaEarthData_url(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "Description":
+		case "rss":
 
-			out.Values[i] = ec._NasaEarthData_Description(ctx, field, obj)
+			out.Values[i] = ec._NasaEarthData_rss(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "Topics":
+		case "description":
 
-			out.Values[i] = ec._NasaEarthData_Topics(ctx, field, obj)
+			out.Values[i] = ec._NasaEarthData_description(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "topics":
+
+			out.Values[i] = ec._NasaEarthData_topics(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
@@ -3665,37 +3665,37 @@ func (ec *executionContext) _NasaEarthDataTopic(ctx context.Context, sel ast.Sel
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("NasaEarthDataTopic")
-		case "Name":
+		case "name":
 
-			out.Values[i] = ec._NasaEarthDataTopic_Name(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "Url":
-
-			out.Values[i] = ec._NasaEarthDataTopic_Url(ctx, field, obj)
+			out.Values[i] = ec._NasaEarthDataTopic_name(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "Rss":
+		case "url":
 
-			out.Values[i] = ec._NasaEarthDataTopic_Rss(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "Description":
-
-			out.Values[i] = ec._NasaEarthDataTopic_Description(ctx, field, obj)
+			out.Values[i] = ec._NasaEarthDataTopic_url(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "Subtopics":
+		case "rss":
 
-			out.Values[i] = ec._NasaEarthDataTopic_Subtopics(ctx, field, obj)
+			out.Values[i] = ec._NasaEarthDataTopic_rss(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "description":
+
+			out.Values[i] = ec._NasaEarthDataTopic_description(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "subtopics":
+
+			out.Values[i] = ec._NasaEarthDataTopic_subtopics(ctx, field, obj)
 
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
@@ -3718,23 +3718,23 @@ func (ec *executionContext) _NasaRssFeed(ctx context.Context, sel ast.SelectionS
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("NasaRssFeed")
-		case "FeedType":
+		case "feed_type":
 
-			out.Values[i] = ec._NasaRssFeed_FeedType(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "Name":
-
-			out.Values[i] = ec._NasaRssFeed_Name(ctx, field, obj)
+			out.Values[i] = ec._NasaRssFeed_feed_type(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "Url":
+		case "name":
 
-			out.Values[i] = ec._NasaRssFeed_Url(ctx, field, obj)
+			out.Values[i] = ec._NasaRssFeed_name(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "url":
+
+			out.Values[i] = ec._NasaRssFeed_url(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
 				invalids++
