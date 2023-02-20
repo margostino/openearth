@@ -1,0 +1,65 @@
+query Query($params: CollectionsInput) {
+    collections(params: $params) {
+        items {
+            conceptId
+            abstract
+            archiveCenter
+            collectionProgress
+            coordinateSystem
+            provider
+            dataCenters
+            dataDates
+            directDistributionInformation
+            doi
+            datasetId
+            metadataFormat
+            onlineAccessFlag
+            organizations
+            metadataFormat
+            platforms
+            nativeId
+            processingLevel
+            relatedUrls
+            scienceKeywords
+            shortName
+            spatialExtent
+            abstract
+            timeStart
+            timeEnd
+            title
+            useConstraints
+            version
+            granules {
+                items {
+                    collection {
+                        abstract
+                    }
+                    collectionConceptId
+                    conceptId
+                    coordinateSystem
+                    dataCenter
+                    datasetId
+                    dayNightFlag
+                    granuleSize
+                    links
+                    measuredParameters
+                    nativeId
+                    onlineAccessFlag
+                    orbitCalculatedSpatialDomains
+                    originalFormat
+                    points
+                    polygons
+                    producerGranuleId
+                    providerDates
+                    relatedUrls
+                    spatialExtent
+                    temporalExtent
+                    timeEnd
+                    timeStart
+                    title
+                    updated
+                }
+            }
+        }
+    }
+}
