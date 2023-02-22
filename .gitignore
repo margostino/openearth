@@ -18,3 +18,5 @@
 .vercel
 .idea/
 .env
+
+tools/files/*
