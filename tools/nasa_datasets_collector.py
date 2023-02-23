@@ -25,7 +25,6 @@ with open("nasa_datasets_query.graphql", 'r') as file:
         keywords = list(dict.fromkeys([keyword['topic'] for keyword in collection['scienceKeywords']] + [keyword['term'] for keyword in collection['scienceKeywords']]))
 
         dataset['did'] = collection['datasetId']
-        dataset['description'] = f"{collection['title']} - {collection['abstract']}"
         dataset['status'] = collection['collectionProgress']
         dataset['format'] = collection['metadataFormat']
         dataset['coordinate_system'] = collection['coordinateSystem']
@@ -46,6 +45,7 @@ with open("nasa_datasets_query.graphql", 'r') as file:
             if 'ARCHIVER' in data_center['roles']:
                 dataset['archivers'].append(f"{long_name} ({short_name})")
 
+        dataset['description'] = f"{collection['title']} - {collection['abstract']}"
         datasets.append(dataset)
 
 with open('files/datasets.yml', 'w') as file:

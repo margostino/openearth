@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 
 import requests
-import yaml
+import json
 from bs4 import BeautifulSoup
 from jinja2 import FileSystemLoader, Environment as Jinja2Environment
 
@@ -106,6 +106,9 @@ for topic_element in topics_list:
     #     topics_description=description,
     # )
 
-with open('topics.yml', 'w') as file:
-    yml_dump = yaml.dump(topics, file, indent=4, sort_keys=False, default_flow_style=False, allow_unicode=True, encoding=None)
-    print(yml_dump)
+json_object = json.dumps(topics, indent=4)
+with open('files/nasa_earthdata.json', 'w') as file:
+    # yml_dump = yaml.dump(topics, file, indent=4, sort_keys=False, default_flow_style=False, allow_unicode=True, encoding=None)
+    file.write(json_object)
+
+print("done")

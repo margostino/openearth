@@ -2,13 +2,13 @@ package cache
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/google/go-github/v45/github"
 	"github.com/margostino/openearth/common"
 	"github.com/margostino/openearth/config"
 	"github.com/margostino/openearth/graph/model"
 	"golang.org/x/oauth2"
-	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"os"
 )
@@ -19,9 +19,9 @@ const (
 )
 
 var indexes = map[string]any{
-	Datasets:      &model.Dataset{},
+	Datasets:      make([]*model.Dataset, 0),
 	NasaEarthData: &model.NasaEarthData{},
-	NasaRssFeeds:  &model.NasaRssFeed{},
+	NasaRssFeeds:  make([]*model.NasaRssFeed, 0),
 }
 
 var index = load()
@@ -34,7 +34,7 @@ func load() map[string]interface{} {
 	baseDataPath := os.Getenv("DATA_PATH")
 
 	for key, value := range indexes {
-		location := fmt.Sprintf("%s/%s.yml", baseDataPath, key)
+		location := fmt.Sprintf("%s/%s.json", baseDataPath, key)
 
 		if config.IsDevEnv() {
 			bytes, err = ioutil.ReadFile(location)
@@ -43,8 +43,8 @@ func load() map[string]interface{} {
 		}
 
 		if !common.IsError(err, fmt.Sprintf("when reading data for %s", key)) && bytes != nil {
-			err = yaml.Unmarshal(bytes, &value)
-			if !common.IsError(err, "when unmarshalling YAML data") {
+			err = json.Unmarshal(bytes, &value)
+			if !common.IsError(err, fmt.Sprintf("when unmarshalling JSON data from location %s", location)) {
 				cache[key] = value
 			}
 		}
