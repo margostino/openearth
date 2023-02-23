@@ -20,3 +20,5 @@
 .env
 
 tools/files/*
+
+tools/__pycache__/

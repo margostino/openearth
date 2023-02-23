@@ -5,14 +5,43 @@ type DatasetSource {
     name: String!
 }
 
-type Dataset {
-    id: ID!
+type DatasetPlatformInstrument {
+    name: String!
+}
+
+type DatasetPlatform {
+    platform_type: String!
+    name: String!
+    instruments: [DatasetPlatformInstrument!]!
+}
+
+type DatasetConstraint {
+    link: String!
     name: String!
     description: String!
+}
+
+type Dataset {
+    dataset_id: String!
+    status: String!
+    version: String!
+    start_at: String!
+    end_at: String!
+    created_at: String!
+    updated_at: String!
+    dataset_url: String!
+    metadata_url: String!
+    format: String!
+    coordinate_system: String!
     category: String!
-    source: DatasetSource!
-    url: String!
-    last_updated: Date!
+    keywords: [String!]!
+    provider: String!
+    distributors: [String!]!
+    archivers: [String!]!
+    organizations: [String!]!
+    platforms: [DatasetPlatform!]!
+    constraints: DatasetConstraint!
+    description: String!
 }
 
 type NasaRssFeed {

@@ -3,13 +3,10 @@ package fetcher
 import (
 	"encoding/json"
 	"github.com/margostino/openearth/cache"
+	"github.com/margostino/openearth/common"
 	"github.com/margostino/openearth/graph/model"
 	"strings"
 )
-
-func matchStringFor(expected *string, current string) bool {
-	return expected == nil || (expected != nil && *expected == current)
-}
 
 func FetchDatasets(id *string, name *string, category *string) ([]*model.Dataset, error) {
 	var datasets []*model.Dataset
@@ -19,12 +16,13 @@ func FetchDatasets(id *string, name *string, category *string) ([]*model.Dataset
 		data, _ := json.Marshal(value)
 		json.Unmarshal(data, &dataset)
 
-		if matchStringFor(id, dataset.ID) && matchStringFor(name, dataset.Name) && matchStringFor(category, dataset.Category) {
+		if matchStringFor(id, dataset.DatasetID) && containsString(name, dataset.Description) && matchStringFor(category, dataset.Category) {
 			datasets = append(datasets, &dataset)
 		}
 	}
 	return datasets, nil
 }
+
 func FetchNasaRssFeeds() ([]*model.NasaRssFeed, error) {
 	var nasaRssFeeds []*model.NasaRssFeed
 	data := cache.GetData(cache.NasaRssFeeds).([]interface{})
@@ -70,4 +68,12 @@ func FetchNasaEarthData(topicName *string) (*model.NasaEarthData, error) {
 	//	//}
 	//}
 	return nasaEarthData, nil
+}
+
+func matchStringFor(expected *string, current string) bool {
+	return expected == nil || (expected != nil && *expected == current)
+}
+
+func containsString(expected *string, current string) bool {
+	return expected == nil || (expected != nil && common.NewString(current).ToLower().Contains(*expected))
 }

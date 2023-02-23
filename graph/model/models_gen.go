@@ -3,13 +3,42 @@
 package model
 
 type Dataset struct {
-	ID          string         `json:"id"`
-	Name        string         `json:"name"`
-	Description string         `json:"description"`
-	Category    string         `json:"category"`
-	Source      *DatasetSource `json:"source"`
-	URL         string         `json:"url"`
-	LastUpdated string         `json:"last_updated"`
+	DatasetID        string             `json:"dataset_id"`
+	Status           string             `json:"status"`
+	Version          string             `json:"version"`
+	StartAt          string             `json:"start_at"`
+	EndAt            string             `json:"end_at"`
+	CreatedAt        string             `json:"created_at"`
+	UpdatedAt        string             `json:"updated_at"`
+	DatasetURL       string             `json:"dataset_url"`
+	MetadataURL      string             `json:"metadata_url"`
+	Format           string             `json:"format"`
+	CoordinateSystem string             `json:"coordinate_system"`
+	Category         string             `json:"category"`
+	Keywords         []string           `json:"keywords"`
+	Provider         string             `json:"provider"`
+	Distributors     []string           `json:"distributors"`
+	Archivers        []string           `json:"archivers"`
+	Organizations    []string           `json:"organizations"`
+	Platforms        []*DatasetPlatform `json:"platforms"`
+	Constraints      *DatasetConstraint `json:"constraints"`
+	Description      string             `json:"description"`
+}
+
+type DatasetConstraint struct {
+	Link        string `json:"link"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+type DatasetPlatform struct {
+	PlatformType string                       `json:"platform_type"`
+	Name         string                       `json:"name"`
+	Instruments  []*DatasetPlatformInstrument `json:"instruments"`
+}
+
+type DatasetPlatformInstrument struct {
+	Name string `json:"name"`
 }
 
 type DatasetSource struct {
