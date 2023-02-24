@@ -16,7 +16,7 @@ func FetchDatasets(id *string, name *string, category *string) ([]*model.Dataset
 		data, _ := json.Marshal(value)
 		json.Unmarshal(data, &dataset)
 
-		if matchStringFor(id, dataset.DatasetID) && containsString(name, dataset.Description) && matchStringFor(category, dataset.Category) {
+		if matchStringFor(id, dataset.DatasetID) && containsString(name, dataset.Description) && containsString(category, dataset.Category) {
 			datasets = append(datasets, &dataset)
 		}
 	}
@@ -33,7 +33,7 @@ func FetchNasaRssFeeds() ([]*model.NasaRssFeed, error) {
 
 func FetchNasaEarthData(topicName *string) (*model.NasaEarthData, error) {
 	var cachedNasaEarthData *model.NasaEarthData
-	data := cache.GetData(cache.NasaEarthData).(map[string]interface{})
+	data := cache.GetData(cache.NasaEarthData).(*model.NasaEarthData)
 	bytes, _ := json.Marshal(data)
 	json.Unmarshal(bytes, &cachedNasaEarthData)
 
