@@ -66,3 +66,12 @@ type NasaRssFeed struct {
 	Name     string `json:"name"`
 	URL      string `json:"url"`
 }
+
+type OuterSpaceObject struct {
+	Name       string `json:"name"`
+	LaunchedAt string `json:"launched_at"`
+	DecayedAt  string `json:"decayed_at"`
+	Status     string `json:"status"`
+	Country    string `json:"country"`
+	Function   string `json:"function"`
+}

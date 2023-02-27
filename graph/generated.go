@@ -108,10 +108,20 @@ type ComplexityRoot struct {
 		URL      func(childComplexity int) int
 	}
 
+	OuterSpaceObject struct {
+		Country    func(childComplexity int) int
+		DecayedAt  func(childComplexity int) int
+		Function   func(childComplexity int) int
+		LaunchedAt func(childComplexity int) int
+		Name       func(childComplexity int) int
+		Status     func(childComplexity int) int
+	}
+
 	Query struct {
-		Datasets      func(childComplexity int, id *string, name *string, category *string) int
-		NasaEarthdata func(childComplexity int, topicName *string) int
-		NasaRssFeeds  func(childComplexity int) int
+		Datasets          func(childComplexity int, id *string, name *string, category *string) int
+		NasaEarthdata     func(childComplexity int, topicName *string) int
+		NasaRssFeeds      func(childComplexity int) int
+		OuterSpaceObjects func(childComplexity int, term *string) int
 	}
 }
 
@@ -119,6 +129,7 @@ type QueryResolver interface {
 	Datasets(ctx context.Context, id *string, name *string, category *string) ([]*model.Dataset, error)
 	NasaEarthdata(ctx context.Context, topicName *string) (*model.NasaEarthData, error)
 	NasaRssFeeds(ctx context.Context) ([]*model.NasaRssFeed, error)
+	OuterSpaceObjects(ctx context.Context, term *string) ([]*model.OuterSpaceObject, error)
 }
 
 type executableSchema struct {
@@ -423,6 +434,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.NasaRssFeed.URL(childComplexity), true
 
+	case "OuterSpaceObject.country":
+		if e.complexity.OuterSpaceObject.Country == nil {
+			break
+		}
+
+		return e.complexity.OuterSpaceObject.Country(childComplexity), true
+
+	case "OuterSpaceObject.decayed_at":
+		if e.complexity.OuterSpaceObject.DecayedAt == nil {
+			break
+		}
+
+		return e.complexity.OuterSpaceObject.DecayedAt(childComplexity), true
+
+	case "OuterSpaceObject.function":
+		if e.complexity.OuterSpaceObject.Function == nil {
+			break
+		}
+
+		return e.complexity.OuterSpaceObject.Function(childComplexity), true
+
+	case "OuterSpaceObject.launched_at":
+		if e.complexity.OuterSpaceObject.LaunchedAt == nil {
+			break
+		}
+
+		return e.complexity.OuterSpaceObject.LaunchedAt(childComplexity), true
+
+	case "OuterSpaceObject.name":
+		if e.complexity.OuterSpaceObject.Name == nil {
+			break
+		}
+
+		return e.complexity.OuterSpaceObject.Name(childComplexity), true
+
+	case "OuterSpaceObject.status":
+		if e.complexity.OuterSpaceObject.Status == nil {
+			break
+		}
+
+		return e.complexity.OuterSpaceObject.Status(childComplexity), true
+
 	case "Query.datasets":
 		if e.complexity.Query.Datasets == nil {
 			break
@@ -453,6 +506,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.NasaRssFeeds(childComplexity), true
+
+	case "Query.outer_space_objects":
+		if e.complexity.Query.OuterSpaceObjects == nil {
+			break
+		}
+
+		args, err := ec.field_Query_outer_space_objects_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Query.OuterSpaceObjects(childComplexity, args["term"].(*string)), true
 
 	}
 	return 0, false
@@ -585,6 +650,21 @@ func (ec *executionContext) field_Query_nasa_earthdata_args(ctx context.Context,
 		}
 	}
 	args["topicName"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Query_outer_space_objects_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 *string
+	if tmp, ok := rawArgs["term"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("term"))
+		arg0, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["term"] = arg0
 	return args, nil
 }
 
@@ -2471,6 +2551,270 @@ func (ec *executionContext) fieldContext_NasaRssFeed_url(ctx context.Context, fi
 	return fc, nil
 }
 
+func (ec *executionContext) _OuterSpaceObject_name(ctx context.Context, field graphql.CollectedField, obj *model.OuterSpaceObject) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OuterSpaceObject_name(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Name, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OuterSpaceObject_name(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OuterSpaceObject",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OuterSpaceObject_launched_at(ctx context.Context, field graphql.CollectedField, obj *model.OuterSpaceObject) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OuterSpaceObject_launched_at(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.LaunchedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OuterSpaceObject_launched_at(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OuterSpaceObject",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OuterSpaceObject_decayed_at(ctx context.Context, field graphql.CollectedField, obj *model.OuterSpaceObject) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OuterSpaceObject_decayed_at(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.DecayedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OuterSpaceObject_decayed_at(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OuterSpaceObject",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OuterSpaceObject_status(ctx context.Context, field graphql.CollectedField, obj *model.OuterSpaceObject) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OuterSpaceObject_status(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Status, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OuterSpaceObject_status(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OuterSpaceObject",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OuterSpaceObject_country(ctx context.Context, field graphql.CollectedField, obj *model.OuterSpaceObject) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OuterSpaceObject_country(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Country, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OuterSpaceObject_country(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OuterSpaceObject",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _OuterSpaceObject_function(ctx context.Context, field graphql.CollectedField, obj *model.OuterSpaceObject) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_OuterSpaceObject_function(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Function, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_OuterSpaceObject_function(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "OuterSpaceObject",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Query_datasets(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Query_datasets(ctx, field)
 	if err != nil {
@@ -2678,6 +3022,71 @@ func (ec *executionContext) fieldContext_Query_nasa_rss_feeds(ctx context.Contex
 			}
 			return nil, fmt.Errorf("no field named %q was found under type NasaRssFeed", field.Name)
 		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Query_outer_space_objects(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_outer_space_objects(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Query().OuterSpaceObjects(rctx, fc.Args["term"].(*string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.OuterSpaceObject)
+	fc.Result = res
+	return ec.marshalOOuterSpaceObject2ᚕᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐOuterSpaceObjectᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Query_outer_space_objects(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Query",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "name":
+				return ec.fieldContext_OuterSpaceObject_name(ctx, field)
+			case "launched_at":
+				return ec.fieldContext_OuterSpaceObject_launched_at(ctx, field)
+			case "decayed_at":
+				return ec.fieldContext_OuterSpaceObject_decayed_at(ctx, field)
+			case "status":
+				return ec.fieldContext_OuterSpaceObject_status(ctx, field)
+			case "country":
+				return ec.fieldContext_OuterSpaceObject_country(ctx, field)
+			case "function":
+				return ec.fieldContext_OuterSpaceObject_function(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type OuterSpaceObject", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Query_outer_space_objects_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return
 	}
 	return fc, nil
 }
@@ -5042,6 +5451,69 @@ func (ec *executionContext) _NasaRssFeed(ctx context.Context, sel ast.SelectionS
 	return out
 }
 
+var outerSpaceObjectImplementors = []string{"OuterSpaceObject"}
+
+func (ec *executionContext) _OuterSpaceObject(ctx context.Context, sel ast.SelectionSet, obj *model.OuterSpaceObject) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, outerSpaceObjectImplementors)
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("OuterSpaceObject")
+		case "name":
+
+			out.Values[i] = ec._OuterSpaceObject_name(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "launched_at":
+
+			out.Values[i] = ec._OuterSpaceObject_launched_at(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "decayed_at":
+
+			out.Values[i] = ec._OuterSpaceObject_decayed_at(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "status":
+
+			out.Values[i] = ec._OuterSpaceObject_status(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "country":
+
+			out.Values[i] = ec._OuterSpaceObject_country(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "function":
+
+			out.Values[i] = ec._OuterSpaceObject_function(ctx, field, obj)
+
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var queryImplementors = []string{"Query"}
 
 func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) graphql.Marshaler {
@@ -5110,6 +5582,26 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 					}
 				}()
 				res = ec._Query_nasa_rss_feeds(ctx, field)
+				return res
+			}
+
+			rrm := func(ctx context.Context) graphql.Marshaler {
+				return ec.OperationContext.RootResolverMiddleware(ctx, innerFunc)
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return rrm(innerCtx)
+			})
+		case "outer_space_objects":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Query_outer_space_objects(ctx, field)
 				return res
 			}
 
@@ -5767,6 +6259,16 @@ func (ec *executionContext) marshalNNasaRssFeed2ᚖgithubᚗcomᚋmargostinoᚋo
 	return ec._NasaRssFeed(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNOuterSpaceObject2ᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐOuterSpaceObject(ctx context.Context, sel ast.SelectionSet, v *model.OuterSpaceObject) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._OuterSpaceObject(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNString2string(ctx context.Context, v interface{}) (string, error) {
 	res, err := graphql.UnmarshalString(v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -6155,6 +6657,53 @@ func (ec *executionContext) marshalONasaEarthDataTopic2ᚖgithubᚗcomᚋmargost
 		return graphql.Null
 	}
 	return ec._NasaEarthDataTopic(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalOOuterSpaceObject2ᚕᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐOuterSpaceObjectᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.OuterSpaceObject) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNOuterSpaceObject2ᚖgithubᚗcomᚋmargostinoᚋopenearthᚋgraphᚋmodelᚐOuterSpaceObject(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
 }
 
 func (ec *executionContext) unmarshalOString2ᚖstring(ctx context.Context, v interface{}) (*string, error) {

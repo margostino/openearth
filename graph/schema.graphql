@@ -65,8 +65,18 @@ type NasaEarthData {
     topics: [NasaEarthDataTopic!]!
 }
 
+type OuterSpaceObject {
+    name: String!
+    launched_at: String!
+    decayed_at: String!
+    status: String!
+    country: String!
+    function: String!
+}
+
 type Query {
     datasets(id: ID, name: String, category: String): [Dataset!]!
     nasa_earthdata(topicName: String): NasaEarthData!
     nasa_rss_feeds: [NasaRssFeed!]!
+    outer_space_objects(term: String): [OuterSpaceObject!]
 }

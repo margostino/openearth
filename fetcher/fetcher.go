@@ -3,7 +3,6 @@ package fetcher
 import (
 	"encoding/json"
 	"github.com/margostino/openearth/cache"
-	"github.com/margostino/openearth/common"
 	"github.com/margostino/openearth/graph/model"
 	"strings"
 )
@@ -70,10 +69,10 @@ func FetchNasaEarthData(topicName *string) (*model.NasaEarthData, error) {
 	return nasaEarthData, nil
 }
 
-func matchStringFor(expected *string, current string) bool {
-	return expected == nil || (expected != nil && *expected == current)
-}
-
-func containsString(expected *string, current string) bool {
-	return expected == nil || (expected != nil && common.NewString(current).ToLower().Contains(*expected))
+func FetchOuterSpaceObjects(term *string) ([]*model.OuterSpaceObject, error) {
+	var outerSpaceObjects []*model.OuterSpaceObject
+	data := cache.GetData(cache.OuterSpaceObjects).([]interface{})
+	bytes, _ := json.Marshal(data)
+	json.Unmarshal(bytes, &outerSpaceObjects)
+	return outerSpaceObjects, nil
 }

@@ -26,6 +26,11 @@ func (r *queryResolver) NasaRssFeeds(ctx context.Context) ([]*model.NasaRssFeed,
 	return fetcher.FetchNasaRssFeeds()
 }
 
+// OuterSpaceObjects is the resolver for the outer_space_objects field.
+func (r *queryResolver) OuterSpaceObjects(ctx context.Context, term *string) ([]*model.OuterSpaceObject, error) {
+	return fetcher.FetchOuterSpaceObjects(term)
+}
+
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 

@@ -19,9 +19,10 @@ const (
 )
 
 var indexes = map[string]any{
-	Datasets:      make([]*model.Dataset, 0),
-	NasaEarthData: &model.NasaEarthData{},
-	NasaRssFeeds:  make([]*model.NasaRssFeed, 0),
+	Datasets:          make([]*model.Dataset, 0),
+	NasaEarthData:     &model.NasaEarthData{},
+	NasaRssFeeds:      make([]*model.NasaRssFeed, 0),
+	OuterSpaceObjects: make([]*model.OuterSpaceObject, 0),
 }
 
 var index = load()
