@@ -3,3 +3,4 @@ aws s3 ls --no-sign-request s3://sentinel-inventory/sentinel-s1-l1c/sentinel-s1-
 pipreqs . --force
 
 https://www.unoosa.org/oosa/osoindex/waxs-search.json?criteria={"filters":[],"startAt":30,"sortings":[{"fieldName":"object.launch.dateOfLaunch_s1","dir":"desc"}],"match":"satellogic","termMatch":"satellogic"}
+https://www.unoosa.org/oosa/osoindex/waxs-search.json?criteria={"startAt":30,"match":"satellogic","termMatch":"satellogic"}

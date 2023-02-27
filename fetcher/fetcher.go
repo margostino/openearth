@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/margostino/openearth/cache"
 	"github.com/margostino/openearth/graph/model"
+	"github.com/margostino/openearth/service"
 	"strings"
 )
 
@@ -71,8 +72,16 @@ func FetchNasaEarthData(topicName *string) (*model.NasaEarthData, error) {
 
 func FetchOuterSpaceObjects(term *string) ([]*model.OuterSpaceObject, error) {
 	var outerSpaceObjects []*model.OuterSpaceObject
-	data := cache.GetData(cache.OuterSpaceObjects).([]interface{})
-	bytes, _ := json.Marshal(data)
-	json.Unmarshal(bytes, &outerSpaceObjects)
-	return outerSpaceObjects, nil
+	var err error
+
+	if term != nil {
+		outerSpaceObjects, err = service.CallOuterSpace(*term)
+	} else {
+		data := cache.GetData(cache.OuterSpaceObjects).([]interface{})
+		bytes, encodeErr := json.Marshal(data)
+		err = encodeErr
+		json.Unmarshal(bytes, &outerSpaceObjects)
+	}
+
+	return outerSpaceObjects, err
 }
